@@ -1,0 +1,8 @@
+{
+  "name": "PulseTD.Game",
+  "rootNamespace": "PulseTD.Game",
+  "references": [
+    "PulseTD.Core",
+    "Zenject"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "PulseTD.Game.Tests",
+  "rootNamespace": "PulseTD.Game.Tests",
+  "references": [
+    "PulseTD.Core",
+    "PulseTD.Core.Tests",
+    "PulseTD.Game"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
+}
