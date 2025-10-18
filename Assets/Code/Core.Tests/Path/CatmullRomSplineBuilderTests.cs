@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using PulseTD.Core.Spline;
+using PulseTD.Core.Path;
 using UnityEngine;
 
-namespace PulseTD.Core.Tests.Spline;
+namespace PulseTD.Core.Tests.Path;
 
-public class CatmullRomWaypointsToSplineConverterTests
+public class CatmullRomSplineBuilderTests
 {
     [TestCaseSource(nameof(GetTestCases))]
     public int Should_Convert_Waypoints_To_Spline(IList<Vector2> waypoints)
     {
-        var sut = new CatmullRomWaypointsToSplineConverter(4);
-        var spline = sut.Convert(waypoints);
+        var sut = new CatmullRomSplineBuilder(4);
+        var spline = sut.Build(waypoints);
         return spline.Count;
     }
 

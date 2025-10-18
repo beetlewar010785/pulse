@@ -1,12 +1,11 @@
 using System;
 using NUnit.Framework;
 using PulseTD.Core.Tests.Path.Mocks;
-using PulseTD.Core.Tests.Spline.Mocks;
 using UnityEngine;
 
 namespace PulseTD.Game.Tests
 {
-    public class FollowerTests
+    public class PathFollowerTests
     {
         [Test]
         public void Should_Throw_Exception_On_Calculate_When_No_Path()
@@ -14,9 +13,9 @@ namespace PulseTD.Game.Tests
             var spline = Array.Empty<Vector2>();
 
             var pathFinder = new PathFinderMock(Array.Empty<Vector2Int>());
-            var cellToWorldPathConverter = new CellToWorldPathConverterMock(Array.Empty<Vector2>());
-            var waypointsToSplineConverter = new WaypointsToSplineConverterMock(spline);
-            var sut = new Follower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
+            var cellToWorldPathConverter = new WorldPathBuilderMock(Array.Empty<Vector2>());
+            var waypointsToSplineConverter = new SplineBuilderMock(spline);
+            var sut = new PathFollower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
 
             Assert.Throws<InvalidOperationException>(() =>
                 sut.CalculatePath(new Vector2Int(0, 0), new Vector2Int(0, 0)));
@@ -26,9 +25,9 @@ namespace PulseTD.Game.Tests
         public void Should_Throw_Exception_On_Update_Position_Before_CalculatePath()
         {
             var pathFinder = new PathFinderMock(Array.Empty<Vector2Int>());
-            var cellToWorldPathConverter = new CellToWorldPathConverterMock(Array.Empty<Vector2>());
-            var waypointsToSplineConverter = new WaypointsToSplineConverterMock(Array.Empty<Vector2>());
-            var sut = new Follower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
+            var cellToWorldPathConverter = new WorldPathBuilderMock(Array.Empty<Vector2>());
+            var waypointsToSplineConverter = new SplineBuilderMock(Array.Empty<Vector2>());
+            var sut = new PathFollower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
 
             Assert.Throws<InvalidOperationException>(() => sut.UpdatePosition(1, 0.1f));
         }
@@ -43,9 +42,9 @@ namespace PulseTD.Game.Tests
             };
 
             var pathFinder = new PathFinderMock(Array.Empty<Vector2Int>());
-            var cellToWorldPathConverter = new CellToWorldPathConverterMock(Array.Empty<Vector2>());
-            var waypointsToSplineConverter = new WaypointsToSplineConverterMock(spline);
-            var sut = new Follower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
+            var cellToWorldPathConverter = new WorldPathBuilderMock(Array.Empty<Vector2>());
+            var waypointsToSplineConverter = new SplineBuilderMock(spline);
+            var sut = new PathFollower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
             sut.CalculatePath(new Vector2Int(0, 0), new Vector2Int(0, 0));
 
             sut.UpdatePosition(0.5f, 1f);
@@ -64,9 +63,9 @@ namespace PulseTD.Game.Tests
             };
 
             var pathFinder = new PathFinderMock(Array.Empty<Vector2Int>());
-            var cellToWorldPathConverter = new CellToWorldPathConverterMock(Array.Empty<Vector2>());
-            var waypointsToSplineConverter = new WaypointsToSplineConverterMock(spline);
-            var sut = new Follower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
+            var cellToWorldPathConverter = new WorldPathBuilderMock(Array.Empty<Vector2>());
+            var waypointsToSplineConverter = new SplineBuilderMock(spline);
+            var sut = new PathFollower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
             sut.CalculatePath(new Vector2Int(0, 0), new Vector2Int(0, 0));
 
             sut.UpdatePosition(1f, 1.5f);
@@ -86,9 +85,9 @@ namespace PulseTD.Game.Tests
             };
 
             var pathFinder = new PathFinderMock(Array.Empty<Vector2Int>());
-            var cellToWorldPathConverter = new CellToWorldPathConverterMock(Array.Empty<Vector2>());
-            var waypointsToSplineConverter = new WaypointsToSplineConverterMock(spline);
-            var sut = new Follower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
+            var cellToWorldPathConverter = new WorldPathBuilderMock(Array.Empty<Vector2>());
+            var waypointsToSplineConverter = new SplineBuilderMock(spline);
+            var sut = new PathFollower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
             sut.CalculatePath(new Vector2Int(0, 0), new Vector2Int(0, 0));
 
             sut.UpdatePosition(10f, 1f);
@@ -106,9 +105,9 @@ namespace PulseTD.Game.Tests
             };
 
             var pathFinder = new PathFinderMock(Array.Empty<Vector2Int>());
-            var cellToWorldPathConverter = new CellToWorldPathConverterMock(Array.Empty<Vector2>());
-            var waypointsToSplineConverter = new WaypointsToSplineConverterMock(spline);
-            var sut = new Follower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
+            var cellToWorldPathConverter = new WorldPathBuilderMock(Array.Empty<Vector2>());
+            var waypointsToSplineConverter = new SplineBuilderMock(spline);
+            var sut = new PathFollower(pathFinder, cellToWorldPathConverter, waypointsToSplineConverter);
             sut.CalculatePath(new Vector2Int(0, 0), new Vector2Int(0, 0));
 
             Assert.DoesNotThrow(() => sut.UpdatePosition(2, 3));

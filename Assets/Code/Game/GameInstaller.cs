@@ -1,5 +1,4 @@
 using PulseTD.Core.Path;
-using PulseTD.Core.Spline;
 using Zenject;
 
 namespace PulseTD.Game
@@ -13,9 +12,9 @@ namespace PulseTD.Game
             Container.BindInstance(mapGrid).AsSingle();
             Container.Bind<ILogicalMap>().FromInstance(mapGrid).AsSingle();
             Container.Bind<IPathFinder>().To<AStarPathFinder>().AsSingle();
-            Container.Bind<ICellToWorldPathConverter>().To<CellCenterCellToWorldPathConverter>().AsSingle().WithArguments(Settings.CellSize);
-            Container.Bind<IWaypointsToSplineConverter>().To<CatmullRomWaypointsToSplineConverter>().AsSingle().WithArguments(Settings.CatmullRomSamplesPerSegment);
-            Container.Bind<Follower>().AsSingle();
+            Container.Bind<IWorldPathBuilder>().To<CellCenterWorldPathBuilder>().AsSingle().WithArguments(Settings.CellSize);
+            Container.Bind<ISplineBuilder>().To<CatmullRomSplineBuilder>().AsSingle().WithArguments(Settings.CatmullRomSamplesPerSegment);
+            Container.Bind<PathFollower>().AsSingle();
         }
     }
 }

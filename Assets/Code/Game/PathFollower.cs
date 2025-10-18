@@ -1,38 +1,37 @@
 using System;
 using System.Collections.Generic;
 using PulseTD.Core.Path;
-using PulseTD.Core.Spline;
 using UnityEngine;
 
 namespace PulseTD.Game;
 
-public class Follower
+public class PathFollower
 {
     public Vector2 Position { get; private set; }
     public bool IsEndReached { get; private set; }
 
     private readonly IPathFinder _pathFinder;
-    private readonly ICellToWorldPathConverter _cllToWorldPathConverter;
-    private readonly IWaypointsToSplineConverter _waypointsToSplineConverter;
+    private readonly IWorldPathBuilder _cllToWorldPathBuilder;
+    private readonly ISplineBuilder _splineBuilder;
 
     private IList<Vector2>? _waypoints;
     private int _targetWaypointIndex;
 
-    public Follower(
+    public PathFollower(
         IPathFinder pathFinder,
-        ICellToWorldPathConverter cllToWorldPathConverter,
-        IWaypointsToSplineConverter waypointsToSplineConverter)
+        IWorldPathBuilder cllToWorldPathBuilder,
+        ISplineBuilder splineBuilder)
     {
         _pathFinder = pathFinder;
-        _cllToWorldPathConverter = cllToWorldPathConverter;
-        _waypointsToSplineConverter = waypointsToSplineConverter;
+        _cllToWorldPathBuilder = cllToWorldPathBuilder;
+        _splineBuilder = splineBuilder;
     }
 
     public void CalculatePath(Vector2Int start, Vector2Int end)
     {
         var cellPath = _pathFinder.FindPath(start, end);
-        var worldPath = _cllToWorldPathConverter.Convert(cellPath);
-        var waypoints = _waypointsToSplineConverter.Convert(worldPath);
+        var worldPath = _cllToWorldPathBuilder.Build(cellPath);
+        var waypoints = _splineBuilder.Build(worldPath);
         if (waypoints.Count == 0)
         {
             throw new InvalidOperationException("Path is empty");

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PulseTD.Core.Tests.Path;
 
-public class CellCenterCellToWorldPathConverterTests
+public class CellCenterWorldPathBuilderTests
 {
     [Test]
     public void Should_Return_Center_Of_Cell()
@@ -17,8 +17,8 @@ public class CellCenterCellToWorldPathConverterTests
             new Vector2Int(1, 2)
         };
         
-        var actual = new CellCenterCellToWorldPathConverter(2)
-            .Convert(initialPath);
+        var actual = new CellCenterWorldPathBuilder(2)
+            .Build(initialPath);
 
         var expected = new[]
         {

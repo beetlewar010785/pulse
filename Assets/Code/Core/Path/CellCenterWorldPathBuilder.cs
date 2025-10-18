@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace PulseTD.Core.Path;
 
-public class CellCenterCellToWorldPathConverter : ICellToWorldPathConverter
+public class CellCenterWorldPathBuilder : IWorldPathBuilder
 {
     private readonly float _cellSize;
 
-    public CellCenterCellToWorldPathConverter(float cellSize)
+    public CellCenterWorldPathBuilder(float cellSize)
     {
         _cellSize = cellSize;
     }
 
-    public Vector2[] Convert(IEnumerable<Vector2Int> path)
+    public Vector2[] Build(IEnumerable<Vector2Int> path)
     {
         return path
             .Select(pt => new Vector2(

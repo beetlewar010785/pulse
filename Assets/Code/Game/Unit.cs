@@ -5,7 +5,7 @@ namespace PulseTD.Game
 {
     public class Unit : MonoBehaviour
     {
-        private Follower _follower = null!;
+        private PathFollower _pathFollower = null!;
         private bool _pathCalculated;
 
         public Vector2Int start;
@@ -13,26 +13,26 @@ namespace PulseTD.Game
         public float speed;
 
         [Inject]
-        public void Init(Follower follower)
+        public void Init(PathFollower pathFollower)
         {
-            _follower = follower;
+            _pathFollower = pathFollower;
         }
 
         private void Update()
         {
             if (!_pathCalculated)
             {
-                _follower.CalculatePath(start, end);
+                _pathFollower.CalculatePath(start, end);
                 _pathCalculated = true;
             }
             
-            _follower.UpdatePosition(Time.deltaTime, speed);
-            if (_follower.IsEndReached)
+            _pathFollower.UpdatePosition(Time.deltaTime, speed);
+            if (_pathFollower.IsEndReached)
             {
-                _follower.ResetPosition();
+                _pathFollower.ResetPosition();
             }
 
-            transform.position = new Vector3(_follower.Position.x, _follower.Position.y, -1f);
+            transform.position = new Vector3(_pathFollower.Position.x, _pathFollower.Position.y, -1f);
         }
     }
 }

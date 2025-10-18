@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PulseTD.Core.Spline;
+namespace PulseTD.Core.Path;
 
-public class CatmullRomWaypointsToSplineConverter : IWaypointsToSplineConverter
+public class CatmullRomSplineBuilder : ISplineBuilder
 {
     private readonly int _samplesPerSegment;
 
-    public CatmullRomWaypointsToSplineConverter(int samplesPerSegment)
+    public CatmullRomSplineBuilder(int samplesPerSegment)
     {
         _samplesPerSegment = samplesPerSegment;
     }
 
-    public IList<Vector2> Convert(IList<Vector2> waypoints)
+    public IList<Vector2> Build(IList<Vector2> waypoints)
     {
         var result = new List<Vector2>();
         if (waypoints.Count == 0)
