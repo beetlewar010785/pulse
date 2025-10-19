@@ -37,10 +37,6 @@ public class PathFollower
         var cellPath = _pathFinder.FindPath(startCell, endCell);
         var worldPath = _cellToWorldPathBuilder.Build(cellPath);
 
-        // insert first and end points
-        worldPath.Insert(0, start);
-        worldPath.Add(end);
-
         var waypoints = _splineBuilder.Build(worldPath);
         if (waypoints.Count == 0)
         {

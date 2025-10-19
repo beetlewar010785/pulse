@@ -1,3 +1,4 @@
+using System;
 using PulseTD.Core.Map;
 using UnityEngine;
 using Zenject;
@@ -6,10 +7,12 @@ namespace PulseTD.Game
 {
     public class Heart: MonoBehaviour
     {
-        private MapGrid _mapGrid = null!;
+        public const string TagName = "Heart";
         
-        public int cellX;
-        public int cellY;
+        private MapGrid _mapGrid = null!;
+
+        public int initalHP;
+        public int currentHP;
 
         [Inject]
         public void Init(MapGrid mapGrid)
