@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PulseTD.Core.Map;
 using UnityEngine;
 
 namespace PulseTD.Core.Path;

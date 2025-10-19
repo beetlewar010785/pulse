@@ -1,3 +1,4 @@
+using PulseTD.Core.Map;
 using UnityEngine;
 using Zenject;
 
@@ -27,7 +28,7 @@ namespace PulseTD.Game
         {
             var width = _mapGrid.Width;
             var height = _mapGrid.Height;
-            const float cellSize = 1f;
+            var cellSize = _mapGrid.CellSize;
             for (var x = 0; x < width; x++)
             {
                 for (var y = 0; y < height; y++)

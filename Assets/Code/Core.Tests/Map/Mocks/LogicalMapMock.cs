@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using PulseTD.Core.Path;
+using PulseTD.Core.Map;
 using UnityEngine;
 
-namespace PulseTD.Core.Tests.Path.Mocks;
+namespace PulseTD.Core.Tests.Map.Mocks;
 
 public class LogicalMapMock : ILogicalMap
 {

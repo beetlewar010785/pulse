@@ -1,3 +1,4 @@
+using PulseTD.Core.Map;
 using UnityEngine;
 using Zenject;
 
@@ -16,9 +17,9 @@ namespace PulseTD.Game
             _mapGrid = mapGrid;
         }
 
-        private void Start()
-        {
-            _mapGrid.Occupy(new Vector2Int(cellX, cellY));
-        }
+        // private void Start()
+        // {
+        //     _mapGrid.Occupy(new Vector2Int(cellX, cellY));
+        // }
     }
 }

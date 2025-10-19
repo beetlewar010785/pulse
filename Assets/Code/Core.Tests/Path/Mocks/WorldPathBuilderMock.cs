@@ -6,14 +6,14 @@ namespace PulseTD.Core.Tests.Path.Mocks;
 
 public class WorldPathBuilderMock: IWorldPathBuilder
 {
-    private readonly Vector2[] _path;
+    private readonly List<Vector2> _path;
 
-    public WorldPathBuilderMock(Vector2[] path)
+    public WorldPathBuilderMock(List<Vector2> path)
     {
         _path = path;
     }
 
-    public Vector2[] Build(IEnumerable<Vector2Int> path)
+    public List<Vector2> Build(IEnumerable<Vector2Int> path)
     {
         return _path;
     }

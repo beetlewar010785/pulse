@@ -1,15 +1,15 @@
+using PulseTD.Core.Path;
 using UnityEngine;
 using Zenject;
 
 namespace PulseTD.Game
 {
-    public class Unit : MonoBehaviour
+    public class PathFollowerComponent : MonoBehaviour
     {
         private PathFollower _pathFollower = null!;
         private bool _pathCalculated;
 
-        public Vector2Int start;
-        public Vector2Int end;
+        public Vector2 end;
         public float speed;
 
         [Inject]
@@ -22,17 +22,17 @@ namespace PulseTD.Game
         {
             if (!_pathCalculated)
             {
-                _pathFollower.CalculatePath(start, end);
+                _pathFollower.CalculatePath(transform.position, end);
                 _pathCalculated = true;
             }
-            
+
             _pathFollower.UpdatePosition(Time.deltaTime, speed);
-            if (_pathFollower.IsEndReached)
-            {
-                _pathFollower.ResetPosition();
-            }
 
             transform.position = new Vector3(_pathFollower.Position.x, _pathFollower.Position.y, -1f);
+
+            if (!_pathFollower.IsEndReached) return;
+
+            Destroy(gameObject);
         }
     }
 }

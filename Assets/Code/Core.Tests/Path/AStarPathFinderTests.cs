@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using PulseTD.Core.Path;
-using PulseTD.Core.Tests.Path.Mocks;
+using PulseTD.Core.Tests.Map.Mocks;
 using UnityEngine;
 
 namespace PulseTD.Core.Tests.Path;

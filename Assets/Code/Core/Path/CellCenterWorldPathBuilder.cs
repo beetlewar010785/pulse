@@ -13,12 +13,12 @@ public class CellCenterWorldPathBuilder : IWorldPathBuilder
         _cellSize = cellSize;
     }
 
-    public Vector2[] Build(IEnumerable<Vector2Int> path)
+    public List<Vector2> Build(IEnumerable<Vector2Int> path)
     {
         return path
             .Select(pt => new Vector2(
                 pt.x * _cellSize + _cellSize / 2,
                 pt.y * _cellSize + _cellSize / 2))
-            .ToArray();
+            .ToList();
     }
 }

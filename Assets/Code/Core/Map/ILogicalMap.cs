@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PulseTD.Core.Path;
+namespace PulseTD.Core.Map;
 
 public interface ILogicalMap
 {

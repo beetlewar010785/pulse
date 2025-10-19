@@ -1,36 +1,46 @@
 using System;
 using System.Collections.Generic;
-using PulseTD.Core.Path;
+using PulseTD.Core.Map;
 using UnityEngine;
 
-namespace PulseTD.Game;
+namespace PulseTD.Core.Path;
 
 public class PathFollower
 {
     public Vector2 Position { get; private set; }
     public bool IsEndReached { get; private set; }
 
+    private readonly IWorldToCellConverter _worldToCellConverter;
     private readonly IPathFinder _pathFinder;
-    private readonly IWorldPathBuilder _cllToWorldPathBuilder;
+    private readonly IWorldPathBuilder _cellToWorldPathBuilder;
     private readonly ISplineBuilder _splineBuilder;
 
     private IList<Vector2>? _waypoints;
     private int _targetWaypointIndex;
 
     public PathFollower(
+        IWorldToCellConverter worldToCellConverter,
         IPathFinder pathFinder,
-        IWorldPathBuilder cllToWorldPathBuilder,
+        IWorldPathBuilder cellToWorldPathBuilder,
         ISplineBuilder splineBuilder)
     {
+        _worldToCellConverter = worldToCellConverter;
         _pathFinder = pathFinder;
-        _cllToWorldPathBuilder = cllToWorldPathBuilder;
+        _cellToWorldPathBuilder = cellToWorldPathBuilder;
         _splineBuilder = splineBuilder;
     }
 
-    public void CalculatePath(Vector2Int start, Vector2Int end)
+    public void CalculatePath(Vector2 start, Vector2 end)
     {
-        var cellPath = _pathFinder.FindPath(start, end);
-        var worldPath = _cllToWorldPathBuilder.Build(cellPath);
+        var startCell = _worldToCellConverter.Convert(start);
+        var endCell = _worldToCellConverter.Convert(end);
+        var cellPath = _pathFinder.FindPath(startCell, endCell);
+        var worldPath = _cellToWorldPathBuilder.Build(cellPath);
+
+        // insert first and end points
+        worldPath.Insert(0, start);
+        worldPath.Add(end);
+
         var waypoints = _splineBuilder.Build(worldPath);
         if (waypoints.Count == 0)
         {
@@ -71,12 +81,5 @@ public class PathFollower
 
             deltaDistance -= distanceToTarget;
         }
-    }
-
-    public void ResetPosition()
-    {
-        Position = Vector2.zero;
-        _targetWaypointIndex = 0;
-        IsEndReached = false;
     }
 }
